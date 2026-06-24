@@ -14,24 +14,26 @@ from openpyxl.utils import get_column_letter
 # ==============================================================================
 # CONFIGURATION — update file paths and labels before running
 # ==============================================================================
+username = "" ## REPLACE WITH USERNAME
+base_path = f"C:/Users/{username}/Documents/Temporary"
 
 # Input CSV files — today's vulnerability snapshot
-TODAY_P0_FILE = "data/today_p0.csv"
-TODAY_P1_FILE = "data/today_p1.csv"
-TODAY_P2_FILE = "data/today_p2.csv"
+TODAY_P0_FILE = f"{base_path}/FIG_P0_Vulnerabilities/war_room_vulnerabilities_combined.csv"
+TODAY_P1_FILE = f"{base_path}/FIG_P1_Vulnerabilities/Vulnerabilities-P1.csv"
+TODAY_P2_FILE = f"{base_path}/FIG_P2_Vulnerabilities/Vulnerabilities-P2.csv"
 
 # Input CSV files — baseline snapshot (start-of-week or program baseline)
-BASELINE_P0_FILE = "data/baseline_p0.csv"
-BASELINE_P1_FILE = "data/baseline_p1.csv"
-BASELINE_P2_FILE = "data/baseline_p2.csv"
+BASELINE_P0_FILE = f"{base_path}/FIG_P0_Vulnerabilities/war_room_vulnerabilities_combined.csv"
+BASELINE_P1_FILE = f"{base_path}/FIG_P1_Vulnerabilities/Vulnerabilities-P1.csv"
+BASELINE_P2_FILE = f"{base_path}/FIG_P2_Vulnerabilities/Vulnerabilities-P2.csv"
 
 # Output workbook path
-OUTPUT_FILE = f"burndown_report_{datetime.now().strftime('%Y%m%d')}.xlsx"
+OUTPUT_FILE = f"{base_path}/FIG_Vulnerabilities_Burndown/burndown_report_{datetime.now().strftime('%Y%m%d')}.xlsx"
 
 # Normalized column names — must match the headers in the P0 CSV files exactly
 INSTANCE_ID_COL         = "Instance ID"
 DEPLOYMENT_LOCATION_COL = "Deployment Location"
-MC2_COL                 = "MC2"
+MC2_COL                 = "MC2 enriched"
 
 # P1 / P2 raw export field names → normalized column names used by P0
 # P0 files are expected to already carry the normalized headers below.
