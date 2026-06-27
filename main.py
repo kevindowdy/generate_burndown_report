@@ -100,6 +100,16 @@ def normalize_columns(df):
     return df.rename(columns=COLUMN_MAPPING)
 
 
+def normalize_locations(df):
+    """Collapse 'Deployed at Company and Client' into 'Deployed at Company'."""
+    if DEPLOYMENT_LOCATION_COL in df.columns:
+        df = df.copy()
+        df[DEPLOYMENT_LOCATION_COL] = df[DEPLOYMENT_LOCATION_COL].replace(
+            "Deployed at Company and Client", "Deployed at Company"
+        )
+    return df
+
+
 # ── Burndown metric computation ────────────────────────────────────────────────
 
 def _instance_ids(df, mc2=None, location=None):
@@ -322,6 +332,14 @@ def main():
     today_p2    = normalize_columns(today_p2)
     baseline_p1 = normalize_columns(baseline_p1)
     baseline_p2 = normalize_columns(baseline_p2)
+
+    print("Normalizing deployment locations...")
+    today_p0    = normalize_locations(today_p0)
+    today_p1    = normalize_locations(today_p1)
+    today_p2    = normalize_locations(today_p2)
+    baseline_p0 = normalize_locations(baseline_p0)
+    baseline_p1 = normalize_locations(baseline_p1)
+    baseline_p2 = normalize_locations(baseline_p2)
 
     print("Building reports...")
     wb = openpyxl.Workbook()
